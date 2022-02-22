@@ -278,6 +278,7 @@ GameObject:
   - component: {fileID: 1299825837}
   - component: {fileID: 1299825842}
   - component: {fileID: 1299825843}
+  - component: {fileID: 1299825844}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -517,6 +518,20 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &1299825844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299825836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf6c54b7a77981841bec3291e97b621c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathclip: {fileID: 8300000, guid: 668a107660fa54fe98e03b698a09aa49, type: 3}
+  jumpforce: 700
 --- !u!1 &1458022399
 GameObject:
   m_ObjectHideFlags: 0
