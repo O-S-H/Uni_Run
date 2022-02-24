@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Dead" && !isDead) ;
+        if (other.tag == "Dead" && !isDead) 
         Die();
         //충돌한 상대방의 태그가 Dead이며 아직 사망하지 않았다면 Die()실행
 
