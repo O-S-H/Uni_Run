@@ -26,7 +26,7 @@ public class Gamemanager : MonoBehaviour
         else
         {
 
-            Debug.LogWarning("¾À¿¡ µÎ°³ ÀÌ»óÀÇ °ÔÀÓ ¸Å´ÏÀú°¡ Á¸ÀçÇÕ´Ï´Ù.");
+            Debug.LogWarning("ì”¬ì— ë‘ê°œ ì´ìƒì˜ ê²Œì„ ë§¤ë‹ˆì €ê°€ ì¡´ì¬í•©ë‹ˆë‹¤.");
             Destroy(gameObject);
         }
     }
@@ -42,12 +42,19 @@ public class Gamemanager : MonoBehaviour
     }
     public void AddScore (int newScore)
     {
+        if(!isGameover)
+        {
+
+            socre += newScore;
+            scoreText.text = " Score :" + socre;   // stringìœ¼ë¡œ  í˜•ë³€í™˜ì„ í•´ì£¼ì–´ì•¼í•¨.
+        } 
 
 
     }
     public void OnplayerDead()
     {
-
+        isGameover = true;
+        gameoverUI.SetActive(true);
     }
 
 }

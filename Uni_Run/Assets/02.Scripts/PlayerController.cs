@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        //°ÔÀÓ ¿ÀºêÁ§Æ®·Î ºÎÅÍ »ç¿ëÇÒ ÄÄÆ÷³ÍÆ®µéÀ» °¡Á®¿Í º¯¼ö¿¡ ÇÒ´ç
+        //ê²Œì„ ì˜¤ë¸Œì íŠ¸ë¡œ ë¶€í„° ì‚¬ìš©í•  ì»´í¬ë„ŒíŠ¸ë“¤ì„ ê°€ì ¸ì™€ ë³€ìˆ˜ì— í• ë‹¹
         playerRigdbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
@@ -36,44 +36,46 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && jumpCount < 2)
         {
             jumpCount++;
-            //Á¡ÇÁÁ÷Àü¿¡ ¼Óµµ¸¦ ¼ø°£ÀûÀ¸·Î Á¦·Î(0,0)·Î º¯°æ
+            //ì í”„ì§ì „ì— ì†ë„ë¥¼ ìˆœê°„ì ìœ¼ë¡œ ì œë¡œ(0,0)ë¡œ ë³€ê²½
             playerRigdbody.velocity = Vector2.zero;
-            //¸®Áöµå¹Ùµğ¿¡ À§ÂÊÀ¸·Î ÈûÁÖ±â
+            //ë¦¬ì§€ë“œë°”ë””ì— ìœ„ìª½ìœ¼ë¡œ í˜ì£¼ê¸°
             playerRigdbody.AddForce(new Vector2(0, jumpforce));
-            //¿Àµğ¿À ¼Ò½º Àç»ı
+            //ì˜¤ë””ì˜¤ ì†ŒìŠ¤ ì¬ìƒ
             playerAudio.Play();
 
         }
         else if (Input.GetMouseButtonUp(0) && playerRigdbody.velocity.y > 0)
         {
-            //¸¶¿ì½º ¿ŞÂÊ ¹öÆ°¿¡¼­ ¼ÕÀ» ¶§´Â ¼ø°£&& ¼ÓµµÀÇ Y°ªÀÌ ¾ç¼ö¶ó¸é(À§·Î »ó½Â)
+            //ë§ˆìš°ìŠ¤ ì™¼ìª½ ë²„íŠ¼ì—ì„œ ì†ì„ ë•ŒëŠ” ìˆœê°„&& ì†ë„ì˜ Yê°’ì´ ì–‘ìˆ˜ë¼ë©´(ìœ„ë¡œ ìƒìŠ¹)
             playerRigdbody.velocity = playerRigdbody.velocity * 0.5f;
         }
-        //¾Ö´Ï¸ŞÀÌÅÍÀÇ Grounded ÆÄ¶ó¹ÌÅÍ¸¦  is Grounded°ªÀ¸·Î °»½Å
+        //ì• ë‹ˆë©”ì´í„°ì˜ Grounded íŒŒë¼ë¯¸í„°ë¥¼  is Groundedê°’ìœ¼ë¡œ ê°±ì‹ 
         animator.SetBool("Grounded", isGrounded); 
     }
     private void Die()
     {
         animator.SetTrigger("Die");
-        //¾Ö´Ï¸ŞÀÌÅÍÀÇ Die Æ®¸®°Å ÆÄ¶ó¹ÌÅÍ¸¦ ¼Â(Set)
-        playerAudio.clip = deathclip; // ¿Àµğ¿À ¼Ò½º¿¡ ÇÒ´çµÈ ¿Àµğ¿À Å¬¸³À» deathClipÀ¸·Î º¯°æ
-        playerAudio.Play(); //»ç¸Á È¿°úÀ½ Àç½Ì
+        //ì• ë‹ˆë©”ì´í„°ì˜ Die íŠ¸ë¦¬ê±° íŒŒë¼ë¯¸í„°ë¥¼ ì…‹(Set)
+        playerAudio.clip = deathclip; // ì˜¤ë””ì˜¤ ì†ŒìŠ¤ì— í• ë‹¹ëœ ì˜¤ë””ì˜¤ í´ë¦½ì„ deathClipìœ¼ë¡œ ë³€ê²½
+        playerAudio.Play(); //ì‚¬ë§ íš¨ê³¼ìŒ ì¬ì‹±
 
         playerRigdbody.velocity = Vector2.zero;
-         isDead = true; // »ç¸Á »óÅÂ¸¦ ture·Î º¯°æ
+         isDead = true; // ì‚¬ë§ ìƒíƒœë¥¼ tureë¡œ ë³€ê²½
+
+        Gamemanager.instance.OnplayerDead();
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Dead" && !isDead) 
         Die();
-        //Ãæµ¹ÇÑ »ó´ë¹æÀÇ ÅÂ±×°¡ DeadÀÌ¸ç ¾ÆÁ÷ »ç¸ÁÇÏÁö ¾Ê¾Ò´Ù¸é Die()½ÇÇà
+        //ì¶©ëŒí•œ ìƒëŒ€ë°©ì˜ íƒœê·¸ê°€ Deadì´ë©° ì•„ì§ ì‚¬ë§í•˜ì§€ ì•Šì•˜ë‹¤ë©´ Die()ì‹¤í–‰
 
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.contacts[0].normal.y > 0.7f) // ¾î¶² Äİ¶óÀÌ´õ¿Í (Ã³À½)´ê¾ÒÀ¸¸ç, Ãæµ¹Ç¥¸éÀÌ À§ÂÊÀ» º¸°í ÀÖÀ¸¸é
+        if (collision.contacts[0].normal.y > 0.7f) // ì–´ë–¤ ì½œë¼ì´ë”ì™€ (ì²˜ìŒ)ë‹¿ì•˜ìœ¼ë©°, ì¶©ëŒí‘œë©´ì´ ìœ„ìª½ì„ ë³´ê³  ìˆìœ¼ë©´
         {
-            isGrounded = true; // is Grounded ¸¦ Ture·Î º¯°æÇÏ°í, ´©Àû Á¡ÇÁ  È½¼ö¸¦ 0À¸·Î ¸®¼Â
+            isGrounded = true; // is Grounded ë¥¼ Tureë¡œ ë³€ê²½í•˜ê³ , ëˆ„ì  ì í”„  íšŸìˆ˜ë¥¼ 0ìœ¼ë¡œ ë¦¬ì…‹
             jumpCount = 0; //
 
 
