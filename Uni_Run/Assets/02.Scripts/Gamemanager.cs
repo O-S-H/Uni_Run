@@ -12,7 +12,7 @@ public class Gamemanager : MonoBehaviour
     public Text scoreText;
     public GameObject gameoverUI;
 
-    private int socre = 0;
+    public int socre = 0;
 
 
 
@@ -46,7 +46,7 @@ public class Gamemanager : MonoBehaviour
         {
 
             socre += newScore;
-            scoreText.text = " Score :" + socre;   // string으로  형변환을 해주어야함.
+            scoreText.text = "Score : " + socre;   // string으로  형변환을 해주어야함.
         } 
 
 
