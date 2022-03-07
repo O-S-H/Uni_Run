@@ -49,6 +49,20 @@ public class PlatformSpawner : MonoBehaviour
         {
             lastSpwnTime = Time.time;
 
+            timeBetSpawn = Random.Range(timeBetSpawnMin, timeBetSpawnMax);
+            float yPos = Random.Range(yMin, yMax);
+
+            platforms[currentIndex].SetActive(false);
+            platforms[currentIndex].SetActive(true);
+
+            platforms[currentIndex].transform.position = new Vector2(xPos, yPos);
+            currentIndex++;
+
+            if(currentIndex >= count)
+            {
+                currentIndex = 0;
+            }
+
 
         }
     }
