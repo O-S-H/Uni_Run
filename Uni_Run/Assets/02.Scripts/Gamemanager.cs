@@ -39,6 +39,7 @@ public class Gamemanager : MonoBehaviour
 
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+        
     }
     public void AddScore (int newScore)
     {
