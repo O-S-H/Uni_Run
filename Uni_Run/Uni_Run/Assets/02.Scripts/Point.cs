@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Point : MonoBehaviour
-{
-    private void OnTriggerEnter2D(Collider2D collision)
+{ 
+   
+    
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        Destroy(gameObject);
+        if (other.tag == "Player")
+        {
+            Destroy(gameObject);
+        }
     }
-
+   
 }
