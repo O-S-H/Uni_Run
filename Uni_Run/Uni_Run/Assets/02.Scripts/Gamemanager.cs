@@ -11,6 +11,7 @@ public class Gamemanager : MonoBehaviour
     public bool isGameover = false;
     public Text scoreText;
     public GameObject gameoverUI;
+    public GameObject MenuPanel;
 
     public int socre = 0;
 
@@ -56,6 +57,16 @@ public class Gamemanager : MonoBehaviour
     {
         isGameover = true;
         gameoverUI.SetActive(true);
+        MenuPanel.SetActive(true);
     }
-
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+       
+    }
+    public void Exit()
+    {
+        Application.Quit();
+    }
+   
 }

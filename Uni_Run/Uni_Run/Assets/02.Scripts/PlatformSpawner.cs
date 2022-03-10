@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlatformSpawner : MonoBehaviour
 {
-    public GameObject platformPrefab; //생성할 발판의 원본 프리팹
+    public GameObject PlatformPrefab; //생성할 발판의 원본 프리팹
     public int count = 3;// 생성할 발판 수
 
     public float timeBetSpawnMin = 1.25f; // 다음 배치까지 최솟값
@@ -16,7 +16,7 @@ public class PlatformSpawner : MonoBehaviour
     private float xPos = 20f; // 배치할 위치의 x값
 
 
-    private GameObject[] platforms; //미리 생성한 발판들
+    private GameObject[] Platforms; //미리 생성한 발판들
     private int currentIndex = 0; // 사용할 현재 순번의 발판
 
     private Vector2 poolPosition = new Vector2(0, -25); // 초반에 생성한 발판을 화면 밖에 숨겨둘 위치
@@ -25,11 +25,11 @@ public class PlatformSpawner : MonoBehaviour
    
     void Start()
     {
-        platforms = new GameObject[count];
+        Platforms = new GameObject[count];
 
         for (int i = 0; i < count; i++)
         {
-            platforms[i] = Instantiate(platformPrefab, poolPosition, Quaternion.identity);// identity
+            Platforms[i] = Instantiate(PlatformPrefab, poolPosition, Quaternion.identity);// identity
         }
         lastSpwnTime = 0f;
         timeBetSpawn =  0f;
@@ -52,10 +52,10 @@ public class PlatformSpawner : MonoBehaviour
             timeBetSpawn = Random.Range(timeBetSpawnMin, timeBetSpawnMax);
             float yPos = Random.Range(yMin, yMax);
 
-            platforms[currentIndex].SetActive(false);
-            platforms[currentIndex].SetActive(true);
+            Platforms[currentIndex].SetActive(false);
+            Platforms[currentIndex].SetActive(true);
 
-            platforms[currentIndex].transform.position = new Vector2(xPos, yPos);
+            Platforms[currentIndex].transform.position = new Vector2(xPos, yPos);
             currentIndex++;
 
             if(currentIndex >= count)

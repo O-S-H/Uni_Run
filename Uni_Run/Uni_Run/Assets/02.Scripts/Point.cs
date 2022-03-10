@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Point : MonoBehaviour
 { 
+
    
     
     private void OnTriggerEnter2D(Collider2D other)
