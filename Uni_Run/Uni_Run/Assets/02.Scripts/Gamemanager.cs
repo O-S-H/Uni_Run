@@ -13,6 +13,9 @@ public class Gamemanager : MonoBehaviour
     public GameObject gameoverUI;
     public GameObject MenuPanel;
 
+    public int hpCount;
+    public Text hpText;
+
     public int socre = 0;
 
 
@@ -68,5 +71,15 @@ public class Gamemanager : MonoBehaviour
     {
         Application.Quit();
     }
-   
+    private void OnEnable()
+    {
+        hpText.text = hpCount.ToString();
+    }
+    public  bool crash()
+    {
+
+        hpText.text = "" + --hpCount;
+        return hpCount <= 0 ? true : false;
+    }
+
 }
